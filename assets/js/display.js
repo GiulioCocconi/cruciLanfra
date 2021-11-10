@@ -25,7 +25,7 @@ function display(cruciverba, debug) {
 function setupTabella(x, y) {
     tabella = []
     for (let i = 0; i < y; i++) {
-        tabella.push(new Array(x).fill(0))      
+        tabella.push(new Array(x).fill([0, 0])) // [n, lettera]
     }
     return tabella
 }
@@ -33,8 +33,9 @@ function setupTabella(x, y) {
 function setupOrizzontali(tabella, parole) {
     parole.forEach((parola) => {
         const lunghezza = parola.word.length
+        tabella[parola.y][parola.x][0] = parola.n
         for (let x = parola.x; x < lunghezza + parola.x; x++) {
-            tabella[parola.y][x] = parola.word.charAt(x);
+            tabella[parola.y][x][1] = parola.word.charAt(x);
         }
     })
     return tabella;
@@ -43,9 +44,12 @@ function setupOrizzontali(tabella, parole) {
 function setupVerticali(tabella, parole) {
     parole.forEach((parola) => {
         const lunghezza = parola.word.length
+        tabella[parola.y][parola.x][0] = parola.n
         for (let y = parola.y; y < lunghezza + parola.y; y++) {
-            tabella[y][parola.x] = parola.word.charAt(y);
+            tabella[y][parola.x][1] = parola.word.charAt(y);
         }
     })
     return tabella;
 }
+
+function setupCruci(tabella) {}
