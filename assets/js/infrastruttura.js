@@ -15,7 +15,6 @@ async function init() {
     
     const testo_titolo = "Cruciverba del numero di " + numero; 
     $('#titolo').text(testo_titolo)
-    $('#titolo').text("Test")
     console.log("File definizione: " + file_definizione)
 
     cruciverba = await leggi(file_definizione)
