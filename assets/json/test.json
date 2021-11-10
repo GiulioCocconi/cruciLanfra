@@ -1,0 +1,21 @@
+{
+    "larghezza": 15,
+    "altezza": 15,
+
+    "paroleOrizzontali": [
+      { "n": 2,
+        "x": 0, "y": 0,
+        "word": "Santa",
+        "clue": "Nome babbo natale in inglese"
+      }
+    ],
+    "paroleVerticali": [
+      {
+        "n": 1,
+        "x": 5, "y": 0,
+        "word": "Renne",
+        "clue": "Animali che trainano la slitta"
+      }
+    ]
+  }
+  
