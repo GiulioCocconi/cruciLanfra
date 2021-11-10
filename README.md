@@ -2,10 +2,8 @@
 
 Il cruciverba del Lanfra
 
-ToDo: 
+## ToDo: 
 
-[] Togliere differenza verticali e orizzontali, aggiungere proprietà JSON
-
-[] Creare funzione lista
-
-[] Creare funzione input
+-[ ] Togliere differenza verticali e orizzontali, aggiungere proprietà JSON
+-[ ] Creare funzione lista
+-[ ] Creare funzione input
