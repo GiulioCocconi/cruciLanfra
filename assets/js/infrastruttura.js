@@ -18,10 +18,7 @@ async function init() {
     console.log("File definizione: " + file_definizione)
 
     cruciverba = await leggi(file_definizione)
-    console.log("Cruciverba: " + cruciverba.larghezza)
     display(cruciverba, true);
-    //const C_DEF = $.getJson("assets/json/" + numero + ".json")
-
 }
 
 function checkNumero(numero) {
@@ -30,7 +27,7 @@ function checkNumero(numero) {
     const file = json_path + numero + ".json"
     console.log("File: " + file)
     var res = "";
-    var dati = "";
+    
     if (numero === "giveUp") {
         alert(":-)")
         window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
