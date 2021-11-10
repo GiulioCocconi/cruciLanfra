@@ -34,7 +34,7 @@ function setupOrizzontali(tabella, parole) {
     parole.forEach((parola) => {
         const lunghezza = parola.word.length
         for (let x = parola.x; x < lunghezza + parola.x; x++) {
-            tabella[x][parola.y] = parola.charAt(x);
+            tabella[x][parola.y] = parola.word.charAt(x);
         }
     })
     return tabella;
@@ -44,7 +44,7 @@ function setupVerticali(tabella, parole) {
     parole.forEach((parola) => {
         const lunghezza = parola.word.length
         for (let y = parola.y; y < lunghezza + parola.y; y++) {
-            tabella[parola.x][y] = parola.charAt(y);
+            tabella[parola.x][y] = parola.word.charAt(y);
         }
     })
     return tabella;
