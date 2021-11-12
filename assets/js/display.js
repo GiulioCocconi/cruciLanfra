@@ -10,14 +10,16 @@ const FONT_COLOR        = '#00000'
 const FAMILY            = "Inconsolata"
 
 var tabellaDisplay;
+var tabellaSoluzioni;
+var tabellaDisplay;
 
 function display(cruciverba, debug) {
-    tabellaSoluzioni     = setupTabella(cruciverba.larghezza, cruciverba.altezza)
-    tabellaInserita      = setupTabella(cruciverba.larghezza, cruciverba.altezza)
-    tabellaDisplay       = setupTabella(cruciverba.larghezza, cruciverba.altezza)
+    tabellaSoluzioni     = setupTabella(cruciverba.larghezza, cruciverba.altezza) // Tabella in cui vengono memorizzate le soluzioni
+    tabellaInserita      = setupTabella(cruciverba.larghezza, cruciverba.altezza) // Tabella che memorizza le parole in input
+    tabellaDisplay       = setupTabella(cruciverba.larghezza, cruciverba.altezza) // Tabella che contiene i dati testo SVG
     
+
     cruciverba.parole.forEach((parola) => {
-        console.log(parola.word)
         tabellaSoluzioni = scriviParolaInTabella(tabellaSoluzioni, parola.word, parola.vert, [parola.x, parola.y])
         tabellaInserita  = scriviTabellaVuota(tabellaInserita, parola.word.length, parola.vert, [parola.x, parola.y])
 
@@ -38,6 +40,7 @@ function display(cruciverba, debug) {
 }
 
 function setupTabella(x, y) {
+    // Crea un array 2d di dimensioni X e Y, pieno di 0
     tabella = []
     for (let i = 0; i < y; i++) {
         tabella.push(new Array(x).fill(0))
@@ -46,8 +49,9 @@ function setupTabella(x, y) {
 }
 
 function drawTavola(tabella) {
-    const DIMENSIONE_X = tabella[0].length * DIMENSIONE_CELLA
-    const DIMENSIONE_Y = tabella.length    * DIMENSIONE_CELLA
+    // Inizializza la tavola
+    const DIMENSIONE_X = tabella[0].length * DIMENSIONE_CELLA // Tabella[0].length = larghezza
+    const DIMENSIONE_Y = tabella.length    * DIMENSIONE_CELLA // Tabella[1].length = altezza
 
     var tavola = SVG().addTo('#cruciverba').size(DIMENSIONE_X, DIMENSIONE_Y)
     tavola.rect(DIMENSIONE_X, DIMENSIONE_Y).fill('#dfdfdf')
@@ -63,34 +67,40 @@ function displayTabellaInTavola(tavola, tabella) {
             if (cella === 0) {
                 quadratoNero(tavola, [x, y]);
             } else {
-                scriviLettera(tavola, cella, [x, y])
+                scriviLetteraInTavola(tavola, cella, [x, y])
             }
         })
     })
 }
 
-function inputParola(tavola, tabella, parolaDaInserire, numeroParola, paroleCruciverba) {
+function inputParola(tavola, parolaDaInserire, numeroParola, paroleCruciverba) {
+    // La parola da inserire viene scritta tutta maiuscola
     parolaDaInserire = parolaDaInserire.toUpperCase()
+
+    // Se è giusta, essa è uguale al target
     var target = paroleCruciverba[numeroParola]
 
+    // Se il numero di lettere è sbagliato non permette l'inserimento e ritorna -1
     if (parolaDaInserire.length != target.word.length) {
         console.log("Attenzione!!!! numero di lettere richiesto: " + target.word.length)
-        return
+        return -1
     } 
-
-    tabella = scriviParolaInTabella(tabella, parolaDaInserire, target.vert, [target.x, target.y])
-    displayTabellaInTavola(tavola, tabella)
-
-    return 
+    // Se la parola ha la lunghezza giusta, inseriscila nella tabella, che verrà mostrata a schermo
+    tabellaInserita = scriviParolaInTabella(tabellaInserita, parolaDaInserire, target.vert, [target.x, target.y])
+    displayTabellaInTavola(tavola, tabellaInserita)
 
 }
 
 function scriviTabellaVuota(tabella, lunghezza, vert, pos) {
     if (vert) {
+        // Se la parola è verticale la X rimane costante (pos[0]), la Y parte da pos[1] fino a
+        // pos[1] + lunghezza della parola
         for (let y = pos[1]; y < lunghezza + pos[1]; y++) {
             tabella[y][pos[0]] = "";
         } 
     } else {
+        // Se la parola è verticale la X rimane costante (pos[0]), la Y parte da pos[1] fino a
+        // pos[1] + lunghezza della parola
         for (let x = pos[0]; x < lunghezza + pos[0]; x++) {
             tabella[pos[1]][x] = "";
         }
@@ -99,9 +109,9 @@ function scriviTabellaVuota(tabella, lunghezza, vert, pos) {
 }
 
 function scriviParolaInTabella(tabella, word, vert, pos) {
+    // V. commenti su funzione scriviTabellaVuota
     const LUNGHEZZA = word.length
     var i = 0;
-    console.log(word)
     if (vert) {
         for (let y = pos[1]; y < LUNGHEZZA + pos[1]; y++) {
             tabella[y][pos[0]] = word.charAt(i);
@@ -121,17 +131,15 @@ function quadratoNero(tavola, pos) {
     rettangolo.move(pos[0] * DIMENSIONE_CELLA, pos[1] * DIMENSIONE_CELLA)
 }
 
-function scriviLettera(tavola, lettera, pos) {
+function scriviLetteraInTavola(tavola, lettera, pos) {
     const x = pos[0] * DIMENSIONE_CELLA + MARGINE_LETTERE
     const y = pos[1] * DIMENSIONE_CELLA + MARGINE_LETTERE
-    console.log(x)
-    console.log(y)
-    console.log(lettera.toString())
 
-
+    // Se la cella è già occupata puliscila...
     if (tabellaDisplay[pos[1]][pos[0]]) {
         tabellaDisplay[pos[1]][pos[0]].clear()
     }
+    // Scrivi la lettera sulla cella
     tabellaDisplay[pos[1]][pos[0]] = tavola.text(lettera.toString())
     tabellaDisplay[pos[1]][pos[0]].move(x, y).font({ size: LETTERA_SIZE, fill: FONT_COLOR, family: FAMILY })
 
