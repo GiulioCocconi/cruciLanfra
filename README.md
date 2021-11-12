@@ -4,6 +4,7 @@ Il cruciverba del Lanfra
 
 ### ToDo: 
 
-- [ ] Togliere differenza verticali e orizzontali, aggiungere proprietà JSON
+- [x] Togliere differenza verticali e orizzontali, aggiungere proprietà JSON
 - [ ] Creare funzione lista
-- [ ] Creare funzione input
+- [x] Creare funzione input
+- [ ] Scrivere interfaccia
