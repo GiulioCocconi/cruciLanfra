@@ -3,22 +3,19 @@
     "altezza": 15,
     "parole": [
         {
-            "n": 1,
-            "vert": false,
+            "n": 1, "vert": false,
             "x": 0, "y": 0,
             "word": "SANTA",
             "clue": "Nome babbo natale in inglese"
         },
         {
-            "n": 1,
-            "vert": true,
+            "n": 1, "vert": true,
             "x": 0, "y": 0,
             "word": "SLITTA",
             "clue": "Mezzo di trasporto di babbo natale"
         },
         {
-            "n": 2,
-            "vert": true,
+            "n": 2, "vert": true,
             "x": 7, "y": 1,
             "word": "RENNE",
             "clue": "Animali che trainano la slitta"
