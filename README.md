@@ -7,4 +7,5 @@ Il cruciverba del Lanfra
 - [x] Togliere differenza verticali e orizzontali, aggiungere proprietà JSON
 - [ ] Creare funzione lista
 - [x] Creare funzione input
-- [ ] Scrivere interfaccia
+- [ ] Creare error-box
+- [ ] Creare input-box
